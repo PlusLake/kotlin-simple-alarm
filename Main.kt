@@ -39,6 +39,8 @@ fun panel(alarm: Alarm, clip: Clip, font: Font) : JPanel {
         addMouseListener(object: MouseAdapter() {
             override fun mousePressed(event: MouseEvent) {
                 alarm.turnedOn = !alarm.turnedOn
+                val closeOperation = if (alarm.turnedOn) JFrame.DO_NOTHING_ON_CLOSE else JFrame.EXIT_ON_CLOSE
+                (SwingUtilities.getWindowAncestor(panel) as JFrame).defaultCloseOperation = closeOperation
                 if (!alarm.turnedOn) alarm.triggered = false
                 repaint()
             }
